@@ -26,8 +26,8 @@ module Top(
     output [7:0] display,
     output [7:0] Anode
     );
-    wire Slow_Clk;
-    wire [3:0] counter_out;
+    wire Slow_Clk;  //output from clock divider, input to counter
+    wire [3:0] counter_out; //output from counter, input to 7seg-decoder
     
     Clock_Divider slowclk(.Clk(clk), .Reset(reset), .Slow_Clock(Slow_Clk));
     
