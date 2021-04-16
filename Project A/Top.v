@@ -21,20 +21,14 @@
 
 
 module Top(
-    input clk, reset,
+    input Clk, Reset,
     input [7:0] AN,
     output [7:0] display,
     output [7:0] Anode
     );
-    wire Slow_Clk;  //output from clock divider, input to counter
-    wire [3:0] counter_out; //output from counter, input to 7seg-decoder
     
-    Clock_Divider slowclk(.Clk(clk), .Reset(reset), .Slow_Clock(Slow_Clk));
-    
-    Counter FSM(.Clk(Slow_Clk), .Reset(reset), .Q(counter_out));
-    
-    Bin_7Segment decoder(.Bin(counter_out), .Seven_Segment(display));
     
     assign Anode = AN;
+    /// Connect different building block together
     
 endmodule
