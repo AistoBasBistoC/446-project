@@ -29,9 +29,9 @@ module Top(
     wire N_Clk1, N_Clk2, Q_Clk, gnd
     wire [3:0] C1_In0, C2_In1, Mux_Bin;
 
-    ClockDivider  381Hz( .Clk(Clk), .Reset(Reset), .N_Clk381Hz(N_Clk1));
+    ClockDivider dut0( .Clk(Clk), .Reset(Reset), .N_Clk381Hz(N_Clk1), .N_Clk1Hz(N_Clk2));
 
-    ClockDivider 1Hz( .Clk(Clk), .Reset(Reset), .N_Clk1Hz(N_Clk2));
+   // ClockDivider 1Hz( .Clk(Clk), .Reset(Reset), .N_Clk1Hz(N_Clk2));
 
     Counter dut1( .Clk(N_Clk2), .Reset(Reset), .Q(Q_Clk), .D(C1_In0));
 
