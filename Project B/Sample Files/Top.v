@@ -25,12 +25,22 @@ module Top(
     output [7:0] Anode,
     output [7:0] Display
     );
-    wire s_clock;
-    wire [4:0] An_t;
-    
-    Clock_Divider U0 (.Clk(Clk), .Reset(Reset), .Slow_Clk(s_clock));
-    Display_Reg  U1 (.Clk(s_clock), .Reset(Reset), .disp(Display));
-    An_State_Gen U2 (.Clk(s_clock), .Reset(Reset), .An(An_t));
+    wire N_Clk1, N_Clk2, Q_Clk, gnd
+    wire [3:0] C1_In0, C2_In1, Mux_Bin;
+
+    ClockDivider  381Hz( .Clk(Clk), .Reset(Reset), .N_Clk381Hz(N_Clk1));
+
+    ClockDivider 1Hz( .Clk(Clk), .Reset(Reset), .N_Clk1Hz(N_Clk2));
+
+    Counter dut1( .Clk(N_Clk2), .Reset(Reset), .Q(Q_Clk), .D(C1_In0));
+
+    Counter dut2( .Clk(Q_Clk), .Reset(Reset), .Q(gnd), .D(C2_In1));
+
+    Decoder dut3( .D_in(N_Clk1), .D_out0(Anode), .D_out1(Anode));
+
+    Mux dut4( .in_0(C1_In0), .in_1(C2_In1), .Sel(N_Clk1), .Mux_out(Mux_Dec));
+
+    Bin_7Segment dut5( .Bin(Mux_Bin), .Seven_Segment(Display));
     
     assign Anode = {3'b111,An_t[4:0]};
     
