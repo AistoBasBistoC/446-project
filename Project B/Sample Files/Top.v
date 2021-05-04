@@ -25,6 +25,7 @@ module Top(
     output [7:0] Anode,
     output [7:0] Display
     );
+    
     wire N_Clk1, N_Clk2, Q_Clk, gnd
     wire [3:0] C1_In0, C2_In1, Mux_Bin;
 
