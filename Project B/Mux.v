@@ -24,7 +24,7 @@ module Mux(
     input [3:0] in_0,
     input [3:0] in_1,
     input Sel,
-    output [3:0] Mux_out
+    input [3:0] Mux_out
     );
     
     assign Mux_out = Sel ? in_0 : in_1;
