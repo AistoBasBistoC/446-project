@@ -29,7 +29,7 @@ module ClockDivider(
     reg [25:0] counter1 = 26'b0;    //26-bit counter = 1Hz
     reg [18:0] counter2 = 19'b0;    //18-bit counter = 381Hz
     
-    //Clock Divider (1Hz, 381Hz and 763Hz)
+    //Clock Divider (1Hz and 381Hz)
     always @(posedge Clk, posedge Reset)
         if(Reset)
             begin
